@@ -91,7 +91,7 @@ app.use(express.json());
 let latestSensorData = {};   // store latest data
 
 // POST route (ESP32 or Postman sends data)
-app.post("/api/sensor-data", (req, res) => {
+app.post("/api/data", (req, res) => {
 
   latestSensorData = req.body;
 
@@ -104,7 +104,7 @@ app.post("/api/sensor-data", (req, res) => {
 });
 
 // GET route (dashboard reads data)
-app.get("/api/latest-data", (req, res) => {
+app.get("/api/data", (req, res) => {
 
   res.json(latestSensorData);
 
