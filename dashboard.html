@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>PrithviNet Environmental Dashboard</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+}
+
+.card{
+background:#1e293b;
+padding:20px;
+margin:20px;
+border-radius:10px;
+display:inline-block;
+width:200px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🌍 PrithviNet Environmental Monitoring</h1>
+
+<div class="card">
+<h3>Air Quality</h3>
+<p id="air">-- ppm</p>
+</div>
+
+<div class="card">
+<h3>CO Gas</h3>
+<p id="co">-- ppm</p>
+</div>
+
+<div class="card">
+<h3>Smoke</h3>
+<p id="smoke">-- ppm</p>
+</div>
+
+<div class="card">
+<h3>Noise</h3>
+<p id="noise">-- dB</p>
+</div>
+
+<div class="card">
+<h3>Turbidity</h3>
+<p id="water">-- NTU</p>
+</div>
+
+<script>
+
+async function loadData(){
+
+const res = await fetch("http://192.168.137.251:5000/api/latest-data");
+
+const data = await res.json();
+
+document.getElementById("air").innerText = data.air_quality_ppm + " ppm";
+document.getElementById("co").innerText = data.co_ppm + " ppm";
+document.getElementById("smoke").innerText = data.smoke_ppm + " ppm";
+document.getElementById("noise").innerText = data.noise_db + " dB";
+document.getElementById("water").innerText = data.turbidity_ntu + " NTU";
+
+}
+
+setInterval(loadData,2000);
+
+</script>
+
+</body>
+</html>
